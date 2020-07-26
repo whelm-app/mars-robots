@@ -36,7 +36,7 @@ describe('calculateRobotPosition', async function() {
         });
     });
 
-    context.skip('with full test case', function() {
+    context('with full test case', function() {
         let sampleInput, sampleOutput;
 
         before(async function() {
