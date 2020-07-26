@@ -10,9 +10,6 @@ const run = async () => {
 
     try {
         const hardcodedInput = await fsPromise.readFile(program.filePath, 'utf8'); // could make encoding a parm
-        if (!hardcodedInput) {
-            console.log('boo');
-        }
         const output = marsRobots.calculateRobotPosition(hardcodedInput);
         console.log(output);
     } catch (e) {

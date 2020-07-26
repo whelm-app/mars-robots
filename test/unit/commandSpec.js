@@ -34,10 +34,65 @@ describe('left', async function() {
         expect(expected).to.deep.equal(actual.orientation);
     });
 
-    describe.skip('handles errors gracefully', function() {
-        it('when input is lower case');
-        it('when input is an unknown command');
-        it('ensure do not modify input');
+    describe('handles errors gracefully', function() {
+        it('when orientation is lower case', function() {
+            const expected = 'W';
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'n'
+            };
+            
+            const actual = left(input);
+    
+            expect(expected).to.deep.equal(actual.orientation);
+        });
+        it('when orientation is unrecognised', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'Z'
+            };
+    
+            expect(() => left(input)).to.throw('Unexpected input orientation');
+        });
+
+        it('when orientation is not provided', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: undefined
+            };
+    
+            expect(() => left(input)).to.throw('Input orientation not provided');
+        });
+        it('ensure does not modify input', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'n'
+            };
+
+            const originalInput = {
+                position: {
+                    ...input.position
+                },
+                orientation: input.orientation
+            };
+            
+            const actual = left(input);
+    
+            expect(originalInput).to.deep.equal(input);
+            expect(originalInput).to.not.deep.equal(actual);
+        });
     });
 });
 
@@ -70,6 +125,67 @@ describe('right', async function() {
         const actual = right(input);
 
         expect(expected).to.deep.equal(actual.orientation);
+    });
+
+    describe('handles errors gracefully', function() {
+        it('when orientation is lower case', function() {
+            const expected = 'E';
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'n'
+            };
+            
+            const actual = right(input);
+    
+            expect(expected).to.deep.equal(actual.orientation);
+        });
+        it('when orientation is unrecognised', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'Z'
+            };
+    
+            expect(() => right(input)).to.throw('Unexpected input orientation');
+        });
+
+        it('when orientation is not provided', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: undefined
+            };
+    
+            expect(() => right(input)).to.throw('Input orientation not provided');
+        });
+        it('ensure does not modify input', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'n'
+            };
+
+            const originalInput = {
+                position: {
+                    ...input.position
+                },
+                orientation: input.orientation
+            };
+            
+            const actual = right(input);
+    
+            expect(originalInput).to.deep.equal(input);
+            expect(originalInput).to.not.deep.equal(actual);
+        });
     });
 });
 
@@ -140,6 +256,54 @@ describe('forward', async function() {
             const actual = forward(input);
     
             expect(expected).to.deep.equal(actual.position.y);
+        });
+    });
+
+    describe('handles errors gracefully', function() {
+        it('when position x is a string', function() {
+            const input = {
+                position: {
+                    x: 'hi',
+                    y: 1
+                },
+                orientation: 'Z'
+            };
+    
+            expect(() => forward(input)).to.throw('Provided position x must be an integer');
+        });
+
+        it('when position y is a string', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 'hello'
+                },
+                orientation: 'Z'
+            };
+    
+            expect(() => forward(input)).to.throw('Provided position y must be an integer');
+        });
+
+        it('ensure does not modify input', function() {
+            const input = {
+                position: {
+                    x: 0,
+                    y: 1
+                },
+                orientation: 'N'
+            };
+
+            const originalInput = {
+                position: {
+                    ...input.position
+                },
+                orientation: input.orientation
+            };
+            
+            const actual = forward(input);
+    
+            expect(originalInput).to.deep.equal(input);
+            expect(originalInput).to.not.deep.equal(actual);
         });
     });
     

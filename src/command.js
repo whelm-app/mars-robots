@@ -7,7 +7,14 @@ const ORIENTATIONS = {
 
 // would be nice to ensure they have the same API (params)
 const left = position => {
-    const currentOrientationIndex = Object.values(ORIENTATIONS).findIndex(o => o === position.orientation);
+    if (!position || !position.orientation) {
+        throw new Error('Input orientation not provided');
+    }
+
+    const currentOrientationIndex = Object.values(ORIENTATIONS).findIndex(o => o === position.orientation.toUpperCase());
+    if (currentOrientationIndex === -1) {
+        throw new Error(`Unexpected input orientation: ${position.orientation}`);
+    }
     const newOrientationIndex = currentOrientationIndex === 0 ? Object.values(ORIENTATIONS).length-1 : currentOrientationIndex -1;
     const newOrientation = Object.values(ORIENTATIONS)[newOrientationIndex];
 
@@ -21,7 +28,14 @@ const left = position => {
 
 
 const right = position => {
-    const currentOrientationIndex = Object.values(ORIENTATIONS).findIndex(o => o === position.orientation);
+    if (!position || !position.orientation) {
+        throw new Error('Input orientation not provided');
+    }
+
+    const currentOrientationIndex = Object.values(ORIENTATIONS).findIndex(o => o === position.orientation.toUpperCase());
+    if (currentOrientationIndex === -1) {
+        throw new Error(`Unexpected input orientation: ${position.orientation}`);
+    }
     const newOrientationIndex = (currentOrientationIndex ===  Object.values(ORIENTATIONS).length-1) ? 0 : currentOrientationIndex +1;
     const newOrientation = Object.values(ORIENTATIONS)[newOrientationIndex];
 
@@ -34,6 +48,12 @@ const right = position => {
 };
 
 const forward = position => {
+    if (typeof position.position.x !== 'number') {
+        throw new Error('Provided position x must be an integer');
+    } else if (typeof position.position.y !== 'number') {
+        throw new Error('Provided position y must be an integer');
+    }
+
     const newPosition = {
         ...position.position
     };
