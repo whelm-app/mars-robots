@@ -1,7 +1,24 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { parseWorld, parsePosition } = require('../../src');
+const { parseWorld, parsePosition, parseInstruction } = require('../../src');
+
+describe('parseInstruction', async function() {
+    it('returns a robot instruction when provided with a valid input line', async function() {
+        const expected = ['L', 'L', 'F', 'R'];
+        const input = expected.join('');
+        
+        const actual = parseInstruction(input);
+
+        expect(expected).to.deep.equal(actual);
+    });
+
+    describe.skip('handles errors gracefully', function() {
+        it('when input is lower case');
+        it('when input is over 50 instructions');
+        it('when input contains commands that do not match known commands');
+    });
+});
 
 describe('parsePosition', async function() {
     it('returns a robot position when provided with a valid input line', async function() {

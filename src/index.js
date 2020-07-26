@@ -18,5 +18,9 @@ module.exports = {
             position,
             orientation
         };
+    },
+    parseInstruction: function(input) {
+        const inputArray = input.split('');
+        return inputArray;
     }
 };
