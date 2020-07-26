@@ -1,4 +1,15 @@
 # Problem: Martian Robots 
+## To run:
+
+    npm start -- -f <FILEPATH>
+
+replacing <FILEPATH> with the path to the file you want to use as input
+
+## To test:
+
+    npm test
+
+
 ## The Problem 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to
 move according to instructions provided from Earth. You are to write a program that
