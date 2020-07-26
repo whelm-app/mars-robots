@@ -5,6 +5,7 @@ const ORIENTATIONS = {
     W: 'W' 
 };
 
+// would be nice to ensure they have the same API (params)
 const left = position => {
     const currentOrientationIndex = Object.values(ORIENTATIONS).findIndex(o => o === position.orientation);
     const newOrientationIndex = currentOrientationIndex === 0 ? Object.values(ORIENTATIONS).length-1 : currentOrientationIndex -1;
@@ -21,7 +22,7 @@ const left = position => {
 
 const right = position => {
     const currentOrientationIndex = Object.values(ORIENTATIONS).findIndex(o => o === position.orientation);
-    const newOrientationIndex = currentOrientationIndex === 0 ? currentOrientationIndex +1 : 0;
+    const newOrientationIndex = (currentOrientationIndex ===  Object.values(ORIENTATIONS).length-1) ? 0 : currentOrientationIndex +1;
     const newOrientation = Object.values(ORIENTATIONS)[newOrientationIndex];
 
     return {
@@ -52,8 +53,16 @@ const forward = position => {
         orientation: position.orientation
     };
 };
+
+const COMMAND_MAP = {
+    'L': left,
+    'F': forward,
+    'R': right
+};
+
 module.exports = {
     ORIENTATIONS,
+    COMMAND_MAP,
     left,
     right,
     forward

@@ -24,6 +24,15 @@ const parseInstruction = function(input) {
     return inputArray;
 };
 
+const parseAllInstructions = function(input) {
+    const inputLines = input.split('\n');
+
+    const inputLinesWithValues = inputLines.filter(line => !!line);
+    
+    const instructionLines = inputLinesWithValues.filter((line, i) => !(i % 2) && i);
+    return instructionLines.map(line => parseInstruction(line));
+};
+
 const parseInput = function(input) {
     const inputLines = input.split('\n');
     const world = parseWorld(inputLines[0]);
@@ -42,6 +51,7 @@ const parseInput = function(input) {
 
 module.exports = {
     parseInstruction,
+    parseAllInstructions,
     parseWorld,
     parsePosition,
     parseInput
