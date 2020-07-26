@@ -4,8 +4,7 @@ const expect = chai.expect;
 const { parseWorld } = require('../../src');
 
 describe('parseWorld', async function() {
-
-    it('returns the sample output when provided with the sample input', async function() {
+    it('returns a world object when provided with a valid input line', async function() {
         const height = 3;
         const width = 5;
         const input = `${width} ${height}`;
