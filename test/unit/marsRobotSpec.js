@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { parseWorld, parsePosition, parseInstruction } = require('../../src');
+const { parseWorld, parsePosition, parseInstruction, parseInput } = require('../../src');
 
 describe('parseInstruction', async function() {
     it('returns a robot instruction when provided with a valid input line', async function() {
@@ -72,9 +72,66 @@ describe('parseWorld', async function() {
     });
 });
 
-describe.skip('parseInput', function() {
+describe('parseInput', function() {
+    context('when provided with valid input', function() {
+        let height, width, input;
+        let robot1x, robot1y, robot1Orientation;
+        let robot2x, robot2y, robot2Orientation;
+        let actual;
+
+        before(function(){
+            height = 6;
+            width = 2;
+            robot1x = 0;
+            robot1y = 3;
+            robot1Orientation = 'N';
+            robot2x = 1;
+            robot2y = 1;
+            robot2Orientation = 'S';
+            const worldLine = `${width} ${height}`;
+            const robot1PositionLine = `${robot1x} ${robot1y} ${robot1Orientation}`;
+            const robot1InstructionLine = `LLL`;
+            const robot2PositionLine = `${robot2x} ${robot2y} ${robot2Orientation}`;
+            const robot2InstructionLine = `FRF`;
+        
+            input = `${worldLine}
+
+${robot1PositionLine}
+${robot1InstructionLine}
+
+${robot2PositionLine}
+${robot2InstructionLine}`;
+
+            actual = parseInput(input);
+        });
+
+        it('sets up height correctly', function() {
+            expect(height).to.equal(actual.height);
+        });
+
+        it('sets up width correctly', function() {
+            expect(width).to.equal(actual.width);
+        });
+
+        it('sets up robot 1 correctly', function() {
+            const robot1 = actual.robots[0];
+            expect(robot1.position.x).to.equal(robot1x);
+            expect(robot1.position.y).to.equal(robot1y);
+            expect(robot1.orientation).to.equal(robot1Orientation);
+        });
+
+        it('sets up robot 2 correctly', function() {
+            const robot2 = actual.robots[1];
+            expect(robot2.position.x).to.equal(robot2x);
+            expect(robot2.position.y).to.equal(robot2y);
+            expect(robot2.orientation).to.equal(robot2Orientation);
+        });
+
+    });
+
     it('when there is no world line');
     it('when there is a robot position without instruction set');
     it('when there is a instruction set without robot position');
     it('when robot co-ordinates are not within world area');
+    it('when there are extra blank lines');
 });
