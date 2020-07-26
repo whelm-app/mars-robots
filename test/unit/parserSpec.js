@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { parseWorld, parsePosition, parseInstruction, parseInput } = require('../../src');
+const { parseWorld, parsePosition, parseInstruction, parseInput } = require('../../src/parser');
 
 describe('parseInstruction', async function() {
     it('returns a robot instruction when provided with a valid input line', async function() {
