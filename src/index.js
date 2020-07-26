@@ -1,3 +1,10 @@
 module.exports = {
-    calculateRobotPosition: function() {}
+    calculateRobotPosition: function() {},
+    parseWorld: function(input) {
+        const inputArray = input.split(' ');
+        return {
+            width: parseInt(inputArray[0], 10),
+            height: parseInt(inputArray[1], 10)
+        }
+    }
 };

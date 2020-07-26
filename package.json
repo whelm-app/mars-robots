@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "npx mocha"
+    "test": "npx mocha './test/**/*.js'"
+
   },
   "author": "hello@whelm.co.uk",
   "license": "ISC"
