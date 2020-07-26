@@ -10,6 +10,25 @@ replacing <FILEPATH> with the path to the file you want to use as input
     npm test
 
 
+## If I had more time:
+- height and width are actually end coordinates(!), and should be renamed accordingly
+- I didn't get time to implement most of the validation tests I wanted to; so I've 
+stubbed out the ones I thought of as I built it and left them in but skipped. Ideally I'd build these out
+and I'm pretty sure there are a few I missed - e.g. over 100 length strings for instructions.
+- I also didn't have time to test all of the methods that I refactored out from the main methods - they 
+are mostly covered by other tests but it'd be good to have the separate coverage also to understand better
+what's failing when they do fail later on (during a project).
+- Ideally the main acceptance test would run against the overall API (e.g. `./index.js` not `src/index.js`), 
+it's more of an integration test at the moment but was still useful for me as I built it out.
+- There's quite a lot of duplication (esp. in `command.js`); it could be useful to pull some of that out, 
+for readability as well as simplifying maintenance.
+- I thought about using a reduce instead of a map to not build up the scents array as a side effect, but 
+it can make the whole process harder to follow so I left it. I'd be tempted to try and tidy it up this way if 
+I had more time.
+- There are a few APIs that would benefit from typing; the map->reduce refactor in the previous point would, 
+and it'd be great to ensure that all of the commands have the same API as they are treated as interchangeable.
+
+
 ## The Problem 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to
 move according to instructions provided from Earth. You are to write a program that
